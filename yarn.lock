@@ -3641,10 +3641,10 @@ jest-runtime@^29.4.1:
     slash "^3.0.0"
     strip-bom "^4.0.0"
 
-jest-sequence@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/jest-sequence/-/jest-sequence-1.0.2.tgz#d55d9a6cee986cee14359cd4fe91f3e366c20f32"
-  integrity sha512-XX9u17ZhgEvgi7hZmAqidjpgvlhDrtMDiagdWpoWT7NZZEnf2LLxEOFTh9MlYdKM2CeUGPG/znCz6zgU9q8NNw==
+jest-sequence@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/jest-sequence/-/jest-sequence-1.0.3.tgz#8921ffe8a2bba05979191c8954c38599c047913f"
+  integrity sha512-G/ZeTr+8cSwujNQGqIBCh2Y5lJpX9XhtDij3b3X9iLWVX2AfN01APYloQnJEzlWbtkvj8oZRp5ak7yKTLHMDFA==
 
 jest-snapshot@^29.4.1:
   version "29.4.1"
