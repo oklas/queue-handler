@@ -3,6 +3,7 @@ import {Sequence, quant, quantDuration} from 'jest-sequence'
 import QueueHandler from './QueueHandler'
 import TestQueue from './__mocks__/TestQueue'
 import QueueHandlerOptions from './QueueHandlerOptions'
+import QueueRecord from './QueueRecord'
 
 const methodsOfTestQueue = ['put', 'get', 'ping', 'done'] as jest.FunctionPropertyNames<
   TestQueue<string>
@@ -28,9 +29,9 @@ describe('queue handler', () => {
 
   it('match basic time sequence', async () => {
     let result: string = ''
-    const handler = async (data: string): Promise<void> => {
+    const handler = async (record: QueueRecord<string>): Promise<void> => {
       await quant(2)
-      result = data
+      result = record.payload
     }
     const queue = new TestQueue<string>({})
     const qh = new QueueHandler(opts, queue, handler)
@@ -77,9 +78,9 @@ describe('queue handler', () => {
 
   it('do not starts pinging on quick handler', async () => {
     let result
-    const handler = async (data: string): Promise<void> => {
-      result = data
-      throw Error(`error for ${data}`)
+    const handler = async (record: QueueRecord<string>): Promise<void> => {
+      result = record.payload
+      throw Error(`error for ${result}`)
     }
     const queue = new TestQueue<string>({})
     const qh = new QueueHandler(opts, queue, handler)
@@ -122,9 +123,9 @@ describe('queue handler', () => {
   it('checks with ping shorter than process', async () => {
     let result
     const queue = new TestQueue<string>({})
-    const handler = async (data: string): Promise<void> => {
+    const handler = async (record: QueueRecord<string>): Promise<void> => {
       await quant(3)
-      result = data
+      result = record.payload
     }
     const qh = new QueueHandler(opts, queue, handler)
     const sequence = new Sequence()
@@ -176,9 +177,9 @@ describe('queue handler', () => {
     const queue = new TestQueue<string>({
       pingDelay: 3,
     })
-    const handler = async (data: string): Promise<void> => {
+    const handler = async (record: QueueRecord<string>): Promise<void> => {
       await quant(2)
-      result = data
+      result = record.payload
     }
     const qh = new QueueHandler(opts, queue, handler)
     const sequence = new Sequence()

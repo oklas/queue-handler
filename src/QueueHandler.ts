@@ -1,7 +1,8 @@
 import QueueHandlerOptions from './QueueHandlerOptions'
+import QueueRecord from './QueueRecord'
 import IQueue from './IQueue'
 
-declare type HandlerFunction<Payload> = (payload: Payload) => Promise<void>
+declare type HandlerFunction<Payload> = (record: QueueRecord<Payload>) => Promise<void>
 
 export default class QueueHandler<Payload> {
   _log: string[] = []
@@ -123,7 +124,7 @@ export default class QueueHandler<Payload> {
     this._processError = ''
     this._startPinging()
     try {
-      await this._handler?.(payload)
+      await this._handler?.({ack, payload})
     } catch (e: unknown) {
       let error = 'error unknown type'
       if (typeof e === 'string') {
