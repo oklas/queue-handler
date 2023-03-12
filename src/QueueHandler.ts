@@ -1,14 +1,12 @@
 import QueueHandlerOptions from './QueueHandlerOptions'
-import QueueRecord from './QueueRecord'
 import IQueue from './IQueue'
-
-declare type HandlerFunction<Payload> = (record: QueueRecord<Payload>) => Promise<void>
+import QueueHandlerFunction from './QueueHandlerFunction'
 
 export default class QueueHandler<Payload> {
   _log: string[] = []
   opts: QueueHandlerOptions
   _queue: IQueue<Payload>
-  _handler: HandlerFunction<Payload> | undefined
+  _handler: QueueHandlerFunction<Payload> | undefined
   _processDone: boolean = false
   _processError: string = ''
   _processAck: string | undefined = undefined
@@ -22,7 +20,7 @@ export default class QueueHandler<Payload> {
   constructor(
     opts: QueueHandlerOptions,
     queue: IQueue<Payload>,
-    handler?: HandlerFunction<Payload>,
+    handler?: QueueHandlerFunction<Payload>,
   ) {
     this.opts = opts
     this._queue = queue
