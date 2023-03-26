@@ -23,8 +23,8 @@ describe('queue handler', () => {
   })
 
   const opts: QueueHandlerOptions = {
-    visibilityInterval: 3 * quantDuration,
-    poolingInterval: 2 * quantDuration,
+    visibilityInterval: (3 * quantDuration) / 1000,
+    poolingInterval: (2 * quantDuration) / 1000,
   }
 
   it('match basic time sequence', async () => {
