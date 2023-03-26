@@ -25,8 +25,8 @@ export default class QueueHandler<Payload> {
     this.opts = opts
     this._queue = queue
     this._handler = handler
-    this._poolingInterval = this.opts.poolingInterval
-    this._pingingInterval = this.opts.visibilityInterval / 2
+    this._poolingInterval = 1000 * this.opts.poolingInterval
+    this._pingingInterval = 1000 * this.opts.visibilityInterval / 2
   }
 
   log(str?: string) {
